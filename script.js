@@ -400,6 +400,31 @@ async function getHotKeywords() {
     }
 }
 
+// 生成骨架屏HTML
+function renderSkeleton(count = 12) {
+    let html = '<div class="video-grid">';
+    for (let i = 0; i < count; i++) {
+        html += `
+            <div class="skeleton-card">
+                <div class="skeleton-cover"></div>
+                <div class="video-info">
+                    <div style="flex-grow: 1;">
+                        <div class="skeleton-title"></div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px;">
+                            <div style="width: 60px; height: 20px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; border-radius: 2px;"></div>
+                            <div style="width: 80px; height: 20px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; border-radius: 2px;"></div>
+                            <div style="width: 50px; height: 20px; background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                    <div class="skeleton-meta"></div>
+                </div>
+            </div>
+        `;
+    }
+    html += '</div>';
+    return html;
+}
+
 // 渲染视频列表
 function renderVideos(data, isSearch = false) {
     const { results, total, page, limit } = data;
@@ -624,9 +649,9 @@ async function searchVideos(keyword, page = 1) {
     // 保存搜索历史
     saveSearchHistory(keyword);
     
-    // 显示加载状态
+    // 显示加载状态和骨架屏
     loadingDiv.classList.add('active');
-    resultsDiv.innerHTML = '';
+    resultsDiv.innerHTML = renderSkeleton();
 
     // 更新输入框内容
     keywordInput.value = keyword;
@@ -677,6 +702,10 @@ function openVideoDetail(bvid) {
 
 // 获取推荐视频
 async function getRecommendedVideos(page = 1) {
+    // 显示加载状态和骨架屏
+    loadingDiv.classList.add('active');
+    resultsDiv.innerHTML = renderSkeleton();
+    
     try {
         // 获取推荐视频列表（包含总数量）
         const videosResponse = await fetch(`${API_BASE_URL}/videos?page=${page}&limit=${pageSize}`);
@@ -694,6 +723,10 @@ async function getRecommendedVideos(page = 1) {
         currentPage = page;
     } catch (error) {
         console.error('获取推荐视频失败:', error);
+        resultsDiv.innerHTML = '<div class="error-message">获取推荐视频失败，请稍后重试</div>';
+    } finally {
+        // 隐藏加载状态
+        loadingDiv.classList.remove('active');
     }
 }
 

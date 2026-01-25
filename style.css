@@ -426,6 +426,7 @@ header h1 {
     display: flex;
     flex-direction: column;
     height: auto;
+    min-height: 350px;
     position: relative;
     z-index: 1;
     pointer-events: auto;
@@ -472,8 +473,8 @@ header h1 {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: auto;
-    min-height: auto;
+    height: 54px;
+    min-height: 54px;
     color: #ffffff;
     font-family: 'Pixel', monospace;
 }
@@ -639,6 +640,55 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-left: 10px;
+}
+
+/* 骨架屏样式 */
+.skeleton-card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(253, 45, 92, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 350px;
+    position: relative;
+    z-index: 1;
+}
+
+.skeleton-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    margin-bottom: 15px;
+}
+
+.skeleton-title {
+    height: 54px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+.skeleton-meta {
+    height: 40px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 2px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 @keyframes spin {
@@ -952,11 +1002,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 .video-cover-large {
     width: 400px;
-    height: auto;
-    max-height: 225px;
-    object-fit: contain;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
     background-color: #000;
     border: none;
+    min-height: 225px;
 }
 
 .video-info-large {
@@ -1248,7 +1298,8 @@ input[type=number]::-webkit-outer-spin-button {
     
     .video-cover-large {
         width: 100%;
-        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
     }
 }
 
