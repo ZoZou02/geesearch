@@ -712,7 +712,7 @@ async function getVideoDetail(bvid) {
                     
                     selectedCategory = '其他';
                     
-                    alert('关键词添加成功！');
+                    // alert('关键词添加成功！');
                 } else {
                     const error = await response.json();
                     alert(`添加关键词失败: ${error.detail || '未知错误'}`);
