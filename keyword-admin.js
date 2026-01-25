@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://vendora.fun/api/geesearch/';
 
 // 管理员模式状态
 let isAdminMode = localStorage.getItem('admin_token') !== null;

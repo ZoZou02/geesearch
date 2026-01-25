@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://vendora.fun/api/geesearch/';
 
 // 从API获取关键词库
 let keywordLibrary = {};
@@ -8,7 +8,7 @@ let allKeywords = [];
 // 从API获取关键词库
 async function loadKeywordsFromAPI() {
     try {
-        const response = await fetch('http://localhost:8000/api/keywords');
+        const response = await fetch(API_BASE_URL + 'keywords');
         const data = await response.json();
         
         // 构建关键词库
