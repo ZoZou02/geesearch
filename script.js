@@ -809,6 +809,61 @@ window.addEventListener('load', async () => {
     await getRecommendedVideos();
 });
 
+// 浏览数功能
+
+// 初始化访问计数
+async function initViewCounter() {
+    // 检查localStorage中是否存在geeViewed键，避免重复计数
+    if (!localStorage.getItem('geeViewed')) {
+        // 增加访问计数
+        await incrementViewCounter();
+        // 将geeViewed存入localStorage，标记已计数
+        localStorage.setItem('geeViewed', '1');
+    }
+    // 加载并更新访问计数显示
+    await loadViewCounter();
+}
+
+// 增加访问计数
+async function incrementViewCounter() {
+    try {
+        await fetch('https://vendora.fun/api/counter?api_key=911612&action=increment&counter_id=geesearch-views&value=1', {
+            method: 'GET',
+            cache: 'no-store'
+        });
+    } catch (error) {
+        console.error('增加访问计数失败:', error);
+    }
+}
+
+// 从后端API获取当前访问计数
+async function loadViewCounter() {
+    try {
+        const response = await fetch('https://vendora.fun/api/counter?api_key=911612&action=get&counter_id=geesearch-views', {
+            method: 'GET',
+            cache: 'no-store'
+        });
+        const data = await response.json();
+        if (data.success) {
+            // 更新显示，get action返回的是current_count字段
+            updateViewCounterDisplay(data.counter.current_count);
+        }
+    } catch (error) {
+        console.error('加载访问计数失败:', error);
+    }
+}
+
+// 更新页面上的计数显示
+function updateViewCounterDisplay(count) {
+    const viewElement = document.getElementById('view');
+    if (viewElement) {
+        viewElement.textContent = count || 0;
+    }
+}
+
+// 页面加载时初始化访问计数
+window.addEventListener('load', initViewCounter);
+
 // 将函数暴露到全局作用域，以便 HTML 中的 onclick 可以访问
 window.searchVideos = searchVideos;
 window.changePage = changePage;
