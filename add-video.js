@@ -68,17 +68,17 @@ function updateAdminIndicator() {
             
             document.getElementById('homeBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'index.html';
+                window.location.href = 'index';
             };
             
             document.getElementById('addVideoBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'add-video.html';
+                window.location.href = 'add-video';
             };
             
             document.getElementById('keywordAdminBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'keyword-admin.html';
+                window.location.href = 'keyword-admin';
             };
             
             document.getElementById('exitAdminBtn').onclick = () => {
@@ -464,7 +464,7 @@ async function saveVideo() {
 
         if (response.ok) {
             alert(isEditMode ? '视频更新成功' : '视频保存成功');
-            window.location.href = 'index.html';
+            window.location.href = 'index';
         } else {
             const error = await response.json();
             alert(`保存失败: ${error.detail || '未知错误'}`);
@@ -555,7 +555,7 @@ async function loadVideoInfo(bvid) {
 // 取消
 function cancel() {
     if (confirm('确定要取消吗？未保存的内容将丢失')) {
-        window.location.href = 'index.html';
+        window.location.href = 'index';
     }
 }
 

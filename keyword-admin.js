@@ -22,17 +22,17 @@ function updateAdminIndicator() {
             
             document.getElementById('homeBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'index.html';
+                window.location.href = 'index';
             };
             
             document.getElementById('addVideoBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'add-video.html';
+                window.location.href = 'add-video';
             };
             
             document.getElementById('keywordAdminBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'keyword-admin.html';
+                window.location.href = 'keyword-admin';
             };
             
             document.getElementById('exitAdminBtn').onclick = () => {

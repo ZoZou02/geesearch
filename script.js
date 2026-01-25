@@ -214,17 +214,17 @@ function updateAdminIndicator() {
             
             document.getElementById('homeBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'index.html';
+                window.location.href = 'index';
             };
             
             document.getElementById('addVideoBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'add-video.html';
+                window.location.href = 'add-video';
             };
             
             document.getElementById('keywordAdminBtn').onclick = (e) => {
                 e.stopPropagation();
-                window.location.href = 'keyword-admin.html';
+                window.location.href = 'keyword-admin';
             };
             
             document.getElementById('exitAdminBtn').onclick = () => {
@@ -672,7 +672,7 @@ function openVideoDetail(bvid) {
         isSearching: isSearching
     }));
     // 在当前页面打开视频详情，或者跳转到新页面
-    window.location.href = `detail.html?bvid=${bvid}`;
+    window.location.href = `detail?bvid=${bvid}`;
 }
 
 // 获取推荐视频
