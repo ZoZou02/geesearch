@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://vendora.fun/api/geesearch/';
+const API_BASE_URL = 'https://apizozou.top/api/geesearch/';
 
 // DOM元素
 const keywordInput = document.getElementById('keyword');
@@ -860,7 +860,7 @@ async function initViewCounter() {
 // 增加访问计数
 async function incrementViewCounter() {
     try {
-        await fetch('https://vendora.fun/api/counter?api_key=911612&action=increment&counter_id=geesearch-views&value=1', {
+        await fetch('https://apizozou.top/api/counter?api_key=911612&action=increment&counter_id=geesearch-views&value=1', {
             method: 'GET',
             cache: 'no-store'
         });
@@ -872,7 +872,7 @@ async function incrementViewCounter() {
 // 从后端API获取当前访问计数
 async function loadViewCounter() {
     try {
-        const response = await fetch('https://vendora.fun/api/counter?api_key=911612&action=get&counter_id=geesearch-views', {
+        const response = await fetch('https://apizozou.top/api/counter?api_key=911612&action=get&counter_id=geesearch-views', {
             method: 'GET',
             cache: 'no-store'
         });

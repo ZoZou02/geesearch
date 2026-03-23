@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://vendora.fun/api/geesearch/';
+const API_BASE_URL = 'https://apizozou.top/api/geesearch/';
 
 // 从API获取关键词库
 let keywordLibrary = {};
