@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://vendora.fun/api/geesearch/';
+
 
 // 从API获取关键词库
 let keywordLibrary = {};
@@ -8,7 +8,7 @@ let allKeywords = [];
 // 从API获取关键词库
 async function loadKeywordsFromAPI() {
     try {
-        const response = await fetch(API_BASE_URL + 'keywords');
+        const response = await fetch(window.API_BASE_URL + 'keywords');
         const data = await response.json();
         
         // 构建关键词库
@@ -406,7 +406,7 @@ async function saveVideo() {
             keyword_categories: JSON.stringify(keywordCategories)
         };
 
-        const url = isEditMode ? `${API_BASE_URL}/videos/${bvid}` : `${API_BASE_URL}/videos`;
+        const url = isEditMode ? `${window.API_BASE_URL}/videos/${bvid}` : `${window.API_BASE_URL}/videos`;
         const method = isEditMode ? 'PUT' : 'POST';
 
         let requestBody = {};
@@ -478,7 +478,7 @@ async function saveVideo() {
 // 加载视频信息（编辑模式）
 async function loadVideoInfo(bvid) {
     try {
-        const response = await fetch(`${API_BASE_URL}/videos/${bvid}`);
+        const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}`);
         if (!response.ok) {
             throw new Error('视频不存在');
         }

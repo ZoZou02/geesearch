@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://apizozou.top/api/geesearch/';
+
 
 // DOM元素
 const keywordInput = document.getElementById('keyword');
@@ -25,7 +25,7 @@ let allKeywords = [];
 // 从API获取关键词库
 async function loadKeywordsFromAPI() {
     try {
-        const response = await fetch(API_BASE_URL + 'keywords');
+        const response = await fetch(window.API_BASE_URL + 'keywords');
         const data = await response.json();
         
         // 构建关键词库
@@ -351,7 +351,7 @@ function formatDuration(duration) {
 // 获取热门关键词
 async function getHotKeywords() {
     try {
-        const response = await fetch(`${API_BASE_URL}/hot-keywords`);
+        const response = await fetch(`${window.API_BASE_URL}/hot-keywords`);
         const keywords = await response.json();
 
         // 渲染热门关键词，如果没有则不显示
@@ -490,7 +490,7 @@ function renderVideos(data, isSearch = false) {
 
         return `
                     <div class="video-card" data-bvid="${result.bvid}">
-                        <img src="${API_BASE_URL}/proxy-image?url=${encodeURIComponent(result.pic)}" alt="${result.title}" class="video-cover" loading="lazy">
+                        <img src="${window.API_BASE_URL}/proxy-image?url=${encodeURIComponent(result.pic)}" alt="${result.title}" class="video-cover" loading="lazy">
                         <div class="video-info">
                             <div style="flex-grow: 1;">
                                 <div class="video-title">${result.title.replace(/^(我Geebar谁啊-|\[我Geebar谁啊\/直播录播\]-)/, '')}</div>
@@ -613,7 +613,7 @@ async function searchVideos(keyword, page = 1) {
     if (keyword.startsWith('admin:')) {
         const password = keyword.substring(6);
         try {
-            const response = await fetch(`${API_BASE_URL}/admin/verify`, {
+            const response = await fetch(`${window.API_BASE_URL}/admin/verify`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -664,7 +664,7 @@ async function searchVideos(keyword, page = 1) {
     currentPage = page;
 
     try {
-        const response = await fetch(`${API_BASE_URL}/search?keyword=${encodeURIComponent(keyword)}&page=${page}&limit=${pageSize}`);
+        const response = await fetch(`${window.API_BASE_URL}/search?keyword=${encodeURIComponent(keyword)}&page=${page}&limit=${pageSize}`);
         const data = await response.json();
 
         // 更新统计信息
@@ -708,7 +708,7 @@ async function getRecommendedVideos(page = 1) {
     
     try {
         // 获取推荐视频列表（包含总数量）
-        const videosResponse = await fetch(`${API_BASE_URL}/videos?page=${page}&limit=${pageSize}`);
+        const videosResponse = await fetch(`${window.API_BASE_URL}/videos?page=${page}&limit=${pageSize}`);
         const data = await videosResponse.json();
 
         // 更新统计信息，显示真实的总视频数量

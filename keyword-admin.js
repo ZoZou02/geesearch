@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://vendora.fun/api/geesearch/';
+
 
 // 管理员模式状态
 let isAdminMode = localStorage.getItem('admin_token') !== null;
@@ -71,7 +71,7 @@ function getColorByCategory(category) {
 // 从API获取关键词库
 async function loadKeywordsFromAPI() {
     try {
-        const response = await fetch(`${API_BASE_URL}/keywords`);
+        const response = await fetch(`${window.API_BASE_URL}/keywords`);
         const data = await response.json();
         
         // 构建关键词库
@@ -134,7 +134,7 @@ function renderKeywords() {
 // 加载关键词的同义词信息并显示
 async function loadSynonymInfoForDisplay(keyword) {
     try {
-        const response = await fetch(`${API_BASE_URL}/keywords/${encodeURIComponent(keyword)}`);
+        const response = await fetch(`${window.API_BASE_URL}/keywords/${encodeURIComponent(keyword)}`);
         const data = await response.json();
         
         const infoElement = document.querySelector(`.synonym-info[data-keyword="${keyword}"]`);
@@ -187,7 +187,7 @@ async function addKeyword() {
     }
     
     try {
-        const response = await fetch(`${API_BASE_URL}/keywords`, {
+        const response = await fetch(`${window.API_BASE_URL}/keywords`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -224,7 +224,7 @@ async function deleteKeyword(keyword) {
     if (confirm(`确定要删除关键词"${keyword}"吗？`)) {
         try {
             const token = localStorage.getItem('admin_token');
-            const response = await fetch(`${API_BASE_URL}/keywords/${encodeURIComponent(keyword)}`, {
+            const response = await fetch(`${window.API_BASE_URL}/keywords/${encodeURIComponent(keyword)}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -325,7 +325,7 @@ async function openSynonymModal(keyword) {
     
     try {
         // 查找所有同义词
-        const allKeywordsResponse = await fetch(`${API_BASE_URL}/keywords`);
+        const allKeywordsResponse = await fetch(`${window.API_BASE_URL}/keywords`);
         const allKeywordsData = await allKeywordsResponse.json();
         
         editingSynonyms = allKeywordsData.keywords
@@ -428,7 +428,7 @@ async function saveSynonyms() {
         const token = localStorage.getItem('admin_token');
         
         // 使用后端的批量更新接口
-        const response = await fetch(`${API_BASE_URL}/keywords/${encodeURIComponent(currentEditingKeyword)}/related`, {
+        const response = await fetch(`${window.API_BASE_URL}/keywords/${encodeURIComponent(currentEditingKeyword)}/related`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

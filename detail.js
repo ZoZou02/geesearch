@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://apizozou.top/api/geesearch/';
+
 
 // 从API获取关键词库
 let keywordLibrary = {};
@@ -8,7 +8,7 @@ let allKeywords = [];
 // 从API获取关键词库
 async function loadKeywordsFromAPI() {
     try {
-        const response = await fetch(API_BASE_URL + 'keywords');
+        const response = await fetch(window.API_BASE_URL + 'keywords');
         const data = await response.json();
         
         // 构建关键词库
@@ -245,7 +245,7 @@ async function deleteVideo() {
     if (confirm(`确定要删除视频吗？此操作不可恢复！`)) {
         try {
             const token = localStorage.getItem('admin_token');
-            const response = await fetch(`${API_BASE_URL}/videos/${bvid}`, {
+            const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -278,7 +278,7 @@ async function getVideoDetail(bvid) {
     videoDetailDiv.innerHTML = '<div class="loading">正在加载视频详情...</div>';
     
     try {
-        const response = await fetch(`${API_BASE_URL}/videos/${bvid}`);
+        const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}`);
         const video = await response.json();
         
         if (!video) {
@@ -330,7 +330,7 @@ async function getVideoDetail(bvid) {
         videoDetailDiv.innerHTML = `
             <section class="video-detail-section">
                 <div class="video-header">
-                    <img src="${API_BASE_URL}/proxy-image?url=${encodeURIComponent(video.pic)}" alt="${video.title}" class="video-cover-large" loading="lazy">
+                    <img src="${window.API_BASE_URL}/proxy-image?url=${encodeURIComponent(video.pic)}" alt="${video.title}" class="video-cover-large" loading="lazy">
                     <div class="video-info-large">
                         <div class="video-title-large">${video.title}</div>
                         <div class="video-meta-large">
@@ -435,7 +435,7 @@ async function getVideoDetail(bvid) {
                 if (confirm(`确定要删除关键词"${keyword}"吗？`)) {
                     try {
                         const token = localStorage.getItem('admin_token');
-                        const response = await fetch(`${API_BASE_URL}/videos/${bvid}/keywords/${encodeURIComponent(keyword)}`, {
+                        const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}/keywords/${encodeURIComponent(keyword)}`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -690,7 +690,7 @@ async function getVideoDetail(bvid) {
             
             try {
                 // 调用API添加关键词，使用selectedCategory
-                const response = await fetch(`${API_BASE_URL}/videos/${bvid}/keywords?keyword=${encodeURIComponent(newKeyword)}&category=${encodeURIComponent(selectedCategory)}`, {
+                const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}/keywords?keyword=${encodeURIComponent(newKeyword)}&category=${encodeURIComponent(selectedCategory)}`, {
                     method: 'POST'
                 });
                 
@@ -732,7 +732,7 @@ async function getVideoDetail(bvid) {
 // 获取关键词对应的视频数量
 async function getKeywordCount(keyword) {
     try {
-        const response = await fetch(`${API_BASE_URL}/keyword-count/${keyword}`);
+        const response = await fetch(`${window.API_BASE_URL}/keyword-count/${keyword}`);
         const data = await response.json();
         const countElement = document.getElementById(`count-${keyword}`);
         if (countElement) {
@@ -763,7 +763,7 @@ async function addKeyword(bvid) {
     
     try {
         // 调用API添加关键词
-        const response = await fetch(`${API_BASE_URL}/videos/${bvid}/keywords?keyword=${encodeURIComponent(keyword)}&category=${encodeURIComponent(category)}`, {
+        const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}/keywords?keyword=${encodeURIComponent(keyword)}&category=${encodeURIComponent(category)}`, {
             method: 'POST'
         });
         
@@ -786,7 +786,7 @@ async function addKeyword(bvid) {
 async function updateKeywordCategory(bvid, keyword, category) {
     try {
         // 调用API更新关键词分类
-        const response = await fetch(`${API_BASE_URL}/videos/${bvid}/keywords/${encodeURIComponent(keyword)}/category?category=${encodeURIComponent(category)}`, {
+        const response = await fetch(`${window.API_BASE_URL}/videos/${bvid}/keywords/${encodeURIComponent(keyword)}/category?category=${encodeURIComponent(category)}`, {
             method: 'PUT'
         });
         
