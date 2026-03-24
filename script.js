@@ -690,14 +690,8 @@ async function searchVideos(keyword, page = 1) {
 
 // 打开视频详情页
 function openVideoDetail(bvid) {
-    // 保存当前状态到sessionStorage，无论是否在搜索状态
-    sessionStorage.setItem('bilibili_search_state', JSON.stringify({
-        keyword: currentSearchKeyword,
-        page: currentPage,
-        isSearching: isSearching
-    }));
-    // 在当前页面打开视频详情，或者跳转到新页面
-    window.location.href = `detail?bvid=${bvid}`;
+    // 在新窗口打开视频详情
+    window.open(`detail?bvid=${bvid}`, '_blank');
 }
 
 // 获取推荐视频
